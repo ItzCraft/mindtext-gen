@@ -5,5 +5,33 @@
   <title>Mindustry text generator</title>
 </head>
 <body>
-  <h1>h</h1>
+  <div class="wrap">
+    <header>
+      <h1>Generate your own mindustry-like text!</h1>
+      <p class="lead">Write under this text and click <strong>Generate</strong>.</p>
+    </header>
+
+    <div class="card">
+      <div id="resultImage" class="image-placeholder" aria-live="polite">
+        <div class="label">Your result: </div>
+      </div>
+
+      <div class="controls">
+        <div>
+          <label for="prompt" class="sr-only">Prompt</label>
+          <textarea id="prompt" placeholder="v8 isn't real"</textarea>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;align-items:stretch">
+          <button id="generate">Generate</button>
+          <button id="clear" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:10px;border-radius:8px;cursor:pointer">Clear</button>
+        </div>
+      </div>
+
+      <div style="margin-top:12px">
+        <label for="output" style="display:block;margin-bottom:6px;color:var(--muted)"></label>
+        <textarea id="output" readonly placeholder="h"></textarea>
+      </div>
+    </div>
+  </div>
 </body>
