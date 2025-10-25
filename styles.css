@@ -1,4 +1,16 @@
-body {
-        font-family: Arial, sans-serif;
-        background-color: #747474ff;
-    }
+:root{--bg:#0b1220;--card:#0f1724;--accent:#6ee7b7;--muted:#95a0b5}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#071029 0%, #081028 100%);color:#e6eef6;display:flex;align-items:flex-start;justify-content:center;min-height:100vh;padding:40px}
+.wrap{width:100%;max-width:980px}
+header{margin-bottom:18px}
+h1{font-size:28px;margin:0 0 6px 0;letter-spacing:0.2px}
+p.lead{margin:0;color:var(--muted)}
+.card{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 8px 30px rgba(3,6,12,0.6)}
+.image-placeholder{height:420px;border-radius:8px;background:repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0 14px, rgba(0,0,0,0) 14px 28px);display:flex;align-items:center;justify-content:center;border:2px dashed rgba(255,255,255,0.06);margin-bottom:14px;position:relative;overflow:hidden}
+.image-placeholder .label{font-size:20px;color:var(--muted);text-align:center;padding:12px}
+.controls{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:start}
+textarea{width:100%;min-height:160px;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));color:inherit;font-size:15px;resize:vertical}
+button{background:linear-gradient(180deg,var(--accent), #2dd4bf);border:none;padding:12px 18px;border-radius:10px;font-weight:600;color:#062018;cursor:pointer;box-shadow:0 8px 20px rgba(46,229,191,0.08)}
+.clear-btn{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:10px;border-radius:8px;cursor:pointer}
+.small{font-size:13px;color:var(--muted);margin-top:8px}
+@media (max-width:700px){.controls{grid-template-columns:1fr} .image-placeholder{height:260px}}
