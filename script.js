@@ -1,11 +1,4 @@
 const letterHeight = 76;
-const defaultWidth = 60;
-const symbolWidths = {
-    "A": 60, "B": 60, "C": 60, "D": 60, "E": 60, "F": 60, "G": 60, "H": 60,
-    "I": 21, "J": 60, "K": 60, "L": 60, "M": 60, "N": 60, "O": 60, "P": 60,
-    "Q": 60, "R": 60, "S": 60, "T": 60, "U": 60, "V": 60, "W": 60, "X": 60,
-    "Y": 60, "Z": 60,
-}
 const letterPath = "assets/";
 const canvas = document.getElementById("outputCanvas");
 const ctx = canvas.getContext("2d");
@@ -20,21 +13,20 @@ generateBtn.addEventListener("click", async () => {
     const symbols = [];
     for (const char of text) {
         const img = await loadLetterImage(char);
-        const width = symbolWidths[char.toUpperCase()] || defaultWidth;
-        symbols.push({ img, width });
+        symbols.push(img);
     }
 
-    // вычисляем ширину текста
-    const totalWidth = symbols.reduce((sum, s) => sum + s.width, 0);
+    const totalWidth = symbols.reduce((sum, img) => sum + img.width, 0);
     canvas.width = totalWidth;
     canvas.height = letterHeight;
 
-    // рисуем посимвольно
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let x = 0;
-    for (const s of symbols) {
-        ctx.drawImage(s.img, x, 0, s.width, letterHeight);
-        x += s.width;
+    for (const img of symbols) {
+        const ratio = letterHeight / img.height;
+        const drawWidth = img.width * ratio;
+        ctx.drawImage(img, x, 0, drawWidth, letterHeight);
+        x += drawWidth;
     }
 
     downloadBtn.disabled = false;
@@ -52,6 +44,7 @@ function loadLetterImage(char) {
         const img = new Image();
         img.onload = () => resolve(img);
         img.crossOrigin = "anonymous";
+
         const name = getFileName(char);
         img.src = `${letterPath}${name}.png`;
         img.onerror = () => {
