@@ -1,37 +1,24 @@
 <!DOCTYPE html>
-<html lang="eng">
+<html lang="enп">
 <head>
-  <meta charset="UTF-8">
-  <title>Mindustry text generator</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindustry Text Generator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1>Generate your own mindustry-like text!</h1>
-      <p class="lead">Write under this text and click <strong>Generate</strong>.</p>
-    </header>
+    <h1>Generate your own Mindustry-like text!</h1>
 
-    <div class="card">
-      <div id="resultImage" class="image-placeholder" aria-live="polite">
-        <div class="label">Your result: </div>
-      </div>
-
-      <div class="controls">
-        <div>
-          <label for="prompt" class="sr-only">Prompt</label>
-          <textarea id="prompt" placeholder="v8 isn't real"></textarea>
-        </div>
-
-        <div style="display:flex;flex-direction:column;gap:10px;align-items:stretch">
-          <button id="generate">Generate</button>
-          <button id="clear" style="background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:10px;border-radius:8px;cursor:pointer">Clear</button>
-        </div>
-      </div>
-      <div style="margin-top:12px">
-        <label for="output" style="display:block;margin-bottom:6px;color:var(--muted)">Результат</label>
-        <textarea id="output" readonly placeholder="Здесь появится сгенерированный текст"></textarea>
-      </div>
+    <div class="output-container">
+        <canvas id="outputCanvas"></canvas>
     </div>
-  </div>
+
+    <div class="input-area">
+        <input type="text" id="textInput" placeholder="Enter your text..." maxlength="50">
+        <button id="generateBtn">Generate</button>
+        <button id="downloadBtn" disabled>Download</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
+</html>
