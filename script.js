@@ -1,5 +1,5 @@
-const letterHeight = 64;
-const defaultWidth = 64;
+const letterHeight = 76;
+const defaultWidth = 60;
 const customWidths = {
 
 }
