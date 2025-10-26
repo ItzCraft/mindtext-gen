@@ -4,7 +4,10 @@ const canvas = document.getElementById("outputCanvas");
 const ctx = canvas.getContext("2d");
 const generateBtn = document.getElementById("generateBtn");
 const downloadBtn = document.getElementById("downloadBtn");
+const tintBtn = document.getElementById("tintBtn");
 const textInput = document.getElementById("textInput");
+const colorInput = document.getElementById("colorInput"),colorInputNum = document.getElementById("colorInputNum"),colorInputSym = document.getElementById("colorInputSym");
+let useTint=false
 
 generateBtn.addEventListener("click", async () => {
     const text = textInput.value.trim();
@@ -13,7 +16,30 @@ generateBtn.addEventListener("click", async () => {
     const symbols = [];
     for (const char of text) {
         const img = await loadLetterImage(char);
-        symbols.push(img);
+        ctx.clearRect(0,0,img.width,img.height);
+        ctx.drawImage(img,0,0)
+        let data=ctx.getImageData(0,0,img.width,img.height).data
+        
+        const code=char.charCodeAt(0)
+        let col="#000000"
+        if(useTint){
+            if(code>=65&&code<=122){
+                col=colorInput.value
+            }else if(code>=47&&code<=57){
+                col=colorInputNum.value
+            }else{
+                col=colorInputSym.value
+            }
+            for (let i=0;i<data.length;i+=4){
+                const r=data[i],g=data[i+1],b=data[i+2];
+                const rgb=Math.max(r,Math.max(g,b))
+                data[i]=parseInt(col.slice(1,3),16)/255*rgb;
+                data[i+1]=parseInt(col.slice(3,5),16)/255*rgb;
+                data[i+2]=parseInt(col.slice(5,7),16)/255*rgb;
+            }
+        }
+        const newimg=new ImageData(data,img.width,img.height)
+        symbols.push(newimg);
     }
 
     const totalWidth = symbols.reduce((sum, img) => sum + img.width, 0);
@@ -25,7 +51,7 @@ generateBtn.addEventListener("click", async () => {
     for (const img of symbols) {
         const ratio = letterHeight / img.height;
         const drawWidth = img.width * ratio;
-        ctx.drawImage(img, x, 0, drawWidth, letterHeight);
+        ctx.putImageData(img, x, 0);
         x += drawWidth;
     }
 
@@ -82,3 +108,18 @@ function getFileName(char) {
     };
     return specialMap[char] || "space";
 }
+
+tintBtn.addEventListener("click", () => {
+    useTint=!useTint
+    document.getElementById("colorDiv").style.display=useTint?"flex":"none";
+    generateBtn.click();
+});
+colorInput.addEventListener("change", () => {
+    generateBtn.click();
+});
+colorInputNum.addEventListener("change", () => {
+    generateBtn.click();
+});
+colorInputSym.addEventListener("change", () => {
+    generateBtn.click();
+});
