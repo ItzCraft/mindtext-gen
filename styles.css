@@ -62,3 +62,21 @@ button:disabled {
     background: #555;
     cursor: default;
 }
+
+.colorInput{
+    height: 25pt;
+    width: 80px;
+    padding: 0px;
+    border-radius: 0px;
+    background: none;
+}
+
+#colorDiv{
+    display: none;
+    margin: 0 auto;
+    margin-top: 10px;
+    background: #1e1e1e;
+    border: 5px solid #555;
+    border-radius: 8px;
+    width: 260px;
+}
