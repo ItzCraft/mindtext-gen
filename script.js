@@ -77,7 +77,8 @@ function getFileName(char) {
         "=": "equal",
         "'": "single",
         "<": "bigger",
-        ">": "smaller"
+        ">": "smaller",
+        ":": "double_dot"
     };
     return specialMap[char] || "space";
 }
