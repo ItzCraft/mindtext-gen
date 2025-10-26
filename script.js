@@ -65,7 +65,6 @@ function getFileName(char) {
         "?": "quest",
         ".": "dot",
         ",": "comma",
-        "-": "dash",
         "(": "circl_bracket_start",
         ")": "circl_bracket_end",
         "[": "squr_bracket_start",
