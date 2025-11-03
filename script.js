@@ -5,6 +5,7 @@ const ctx = canvas.getContext("2d");
 const generateBtn = document.getElementById("generateBtn");
 const downloadBtn = document.getElementById("downloadBtn");
 const tintBtn = document.getElementById("tintBtn");
+const lengthInput = document.getElementById("LengthPerLine");
 const textInput = document.getElementById("textInput");
 const colorInput = document.getElementById("colorInput"),colorInputNum = document.getElementById("colorInputNum"),colorInputSym = document.getElementById("colorInputSym");
 let useTint=false
@@ -42,17 +43,43 @@ generateBtn.addEventListener("click", async () => {
         symbols.push(newimg);
     }
 
-    const totalWidth = symbols.reduce((sum, img) => sum + img.width, 0);
+    
+    const perRow = lengthInput.value.trim(); // change height every X symbols
+    const letterHeight = 100; // to be honest, i guessed... it works though
+    
+    // find maximum symbol width for sizing logic
+    const maxWidth = Math.max(...symbols.map(img => img.width));
+    const totalWidth = maxWidth * perRow;
+    const totalHeight = Math.ceil(symbols.length / perRow) * letterHeight;
+    
     canvas.width = totalWidth;
-    canvas.height = letterHeight;
-
+    canvas.height = totalHeight;
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
     let x = 0;
+    let y = 0;
+    let count = 0;
+
     for (const img of symbols) {
         const ratio = letterHeight / img.height;
         const drawWidth = img.width * ratio;
-        ctx.putImageData(img, x, 0);
+    
+        const offscreen = document.createElement('canvas');
+        offscreen.width = img.width;
+        offscreen.height = img.height;
+        offscreen.x = -offscreen.width + 100 //little bit of padding, why not
+        offscreen.getContext('2d').putImageData(img, 0, 0);
+        ctx.drawImage(offscreen, x, y, drawWidth, letterHeight);
+    
         x += drawWidth;
+        count++;
+    
+        // Move to next row every 'perRow' amount of symbols
+        if (count % perRow === 0 || x>ctx.width) {
+            x = 0;
+            y += letterHeight;
+        }
     }
 
     downloadBtn.disabled = false;
