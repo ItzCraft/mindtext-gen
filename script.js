@@ -52,7 +52,7 @@ generateBtn.addEventListener("click", async () => {
     const totalWidth = maxWidth * perRow;
     const totalHeight = Math.ceil(symbols.length / perRow) * letterHeight;
     
-    canvas.width = totalWidth;
+    canvas.width = totalWidth+100;
     canvas.height = totalHeight;
     
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -60,14 +60,14 @@ generateBtn.addEventListener("click", async () => {
     let x = 0;
     let y = 0;
     let count = 0;
-
+    alert("you been upated)
     for (const img of symbols) {
         const ratio = letterHeight / img.height;
         const drawWidth = img.width * ratio;
     
         const offscreen = document.createElement('canvas');
         offscreen.width = img.width;
-        offscreen.height = img.height;
+        offscreen.height = img.height*2;
         offscreen.x = -offscreen.width + 100 //little bit of padding, why not
         offscreen.getContext('2d').putImageData(img, 0, 0);
         ctx.drawImage(offscreen, x, y, drawWidth, letterHeight);
