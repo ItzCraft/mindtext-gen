@@ -66,7 +66,7 @@ generateBtn.addEventListener("click", async () => {
     
         const offscreen = document.createElement('canvas');
         offscreen.width = img.width;
-        offscreen.height = img.height*2;
+        offscreen.height = img.height;
         offscreen.x = -offscreen.width + 100 //little bit of padding, why not
         offscreen.getContext('2d').putImageData(img, 0, 0);
         ctx.drawImage(offscreen, x, y, drawWidth, letterHeight);
