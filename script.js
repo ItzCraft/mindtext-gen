@@ -60,7 +60,6 @@ generateBtn.addEventListener("click", async () => {
     let x = 0;
     let y = 0;
     let count = 0;
-    alert("you been upated)
     for (const img of symbols) {
         const ratio = letterHeight / img.height;
         const drawWidth = img.width * ratio;
