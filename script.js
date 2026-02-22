@@ -69,6 +69,29 @@ generateBtn.addEventListener("click", async () => {
 
     canvas.width = Math.ceil(maxRowWidth) + 100;
     canvas.height = rowCount * letterHeight;
+    let x = 0;
+    let y = 0;
+    let countDraw = 0;
+
+    for(const img of symbols){
+        const ratio = letterHeight / img.height;
+        const drawWidth = img.width * ratio;
+
+        const offscreen = document.createElement("canvas");
+        offscreen.width = img.width;
+        offscreen.height = img.height;
+        offscreen.getContext("2d").putImageData(img,0,0);
+
+        ctx.drawImage(offscreen, x, y, drawWidth, letterHeight);
+
+        x += drawWidth;
+        countDraw++;
+
+        if(countDraw % perRow === 0){
+            x = 0;
+            y += letterHeight;
+        }
+    }
 
     downloadBtn.disabled = false;
 });
