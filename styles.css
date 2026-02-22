@@ -44,7 +44,7 @@ input {
 }
 
 label[for="alignSelect"] {
-    font-size: 3em;
+    font-size: 2em;
     font-weight: bold;
     color: #fff;
     margin-right: 8px;
@@ -53,7 +53,7 @@ label[for="alignSelect"] {
 
 #alignSelect {
     padding: 10px;
-    font-size: 3em;
+    font-size: 2em;
     background-color: #2e7dd6;
     color: white;
     border-radius: 5px;
