@@ -83,7 +83,10 @@ generateBtn.addEventListener("click", async () => {
     let y = 0;
 
     for(const symbols of allLines){
-          const lineWidth = symbols.reduce((sum,img)=>sum+img.width,0);
+          const lineWidth = symbols.reduce((sum,img)=>{
+                const ratio = letterHeight / img.height;
+                return sum + img.width * ratio;
+          }, 0);
           let x = 0;
           
           const align = alignSelect.value;
