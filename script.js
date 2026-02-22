@@ -44,41 +44,31 @@ generateBtn.addEventListener("click", async () => {
     }
 
     
-    const perRow = lengthInput.value.trim(); // change height every X symbol
-    
-    // find maximum symbol width for sizing logic
-    const maxWidth = Math.max(...symbols.map(img => img.width));
-    const totalWidth = maxWidth * perRow;
-    const totalHeight = Math.ceil(symbols.length / perRow) * letterHeight;
-    
-    canvas.width = totalWidth+100;
-    canvas.height = totalHeight;
-    
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    let x = 0;
-    let y = 0;
+    const perRow = parseInt(lengthInput.value) || Infinity;
+
+    let rowWidth = 0;
+    let maxRowWidth = 0;
+    let rowCount = 1;
     let count = 0;
-    for (const img of symbols) {
+
+    for(const img of symbols){
         const ratio = letterHeight / img.height;
         const drawWidth = img.width * ratio;
-    
-        const offscreen = document.createElement('canvas');
-        offscreen.width = img.width;
-        offscreen.height = img.height;
-        offscreen.x = -offscreen.width + 100 //little bit of padding, why not
-        offscreen.getContext('2d').putImageData(img, 0, 0);
-        ctx.drawImage(offscreen, x, y, drawWidth, letterHeight);
-    
-        x += drawWidth;
+
+        rowWidth += drawWidth;
         count++;
-    
-        // Move to next row every 'perRow' amount of symbols
-        if (count % perRow === 0 || x>ctx.width) {
-            x = 0;
-            y += letterHeight;
+
+        if(count % perRow === 0){
+            maxRowWidth = Math.max(maxRowWidth, rowWidth)
+            rowWidth = 0;
+            rowCount++;
         }
     }
+
+    maxRowWidth = Math.max(maxRowWidth, rowWidth);
+
+    canvas.width = Math.ceil(maxRowWidth) + 100;
+    canvas.height = rowCount * letterHeight;
 
     downloadBtn.disabled = false;
 });
