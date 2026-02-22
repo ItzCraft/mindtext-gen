@@ -43,7 +43,7 @@ input {
     border: none;
 }
 
-label {
+.alignSelect {
     padding: 10px;
     font-size: 1em;
     background-color: #2e7dd6;
