@@ -87,25 +87,30 @@ generateBtn.addEventListener("click", async () => {
                 const ratio = letterHeight / img.height;
                 return sum + img.width * ratio;
           }, 0);
-          let x = 0;
           
+          let x = 0;
           const align = alignSelect.value;
           
           if(align === "center"){
                 x = (canvas.width - lineWidth) / 2;
-          }
-          else if(align === "right"){
+          } else if(align === "right"){
                 x = canvas.width - lineWidth;
           }
 
           for(const img of symbols){
+                const ratio = letterHeight / img.height;
+                const drawWidth = img.width * ratio;
+      
+                const tempCanvas = document.createElement("canvas");
+                tempCanvas.width = img.width;
+                tempCanvas.height = img.height;
+                tempCanvas.getContext("2d").putImageData(img, 0, 0);
 
-            const ratio = letterHeight / img.height;
-            const drawWidth = img.width * ratio;
-            ctx.putImageData(img,x,y);
+                ctx.drawImage(tempCanvas, 0, 0, img.width, img.height, x, y, drawWidth, letterHeight);
 
-            x += drawWidth;
+                x += drawWidth;
           }
+
           y += letterHeight;
     }
 
