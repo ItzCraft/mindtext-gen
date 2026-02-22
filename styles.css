@@ -43,6 +43,29 @@ input {
     border: none;
 }
 
+label[for="alignSelect"] {
+    font-size: 3em;
+    font-weight: bold;
+    color: #fff;
+    margin-right: 8px;
+    user-select: none;
+}
+
+#alignSelect {
+    padding: 10px;
+    font-size: 3em;
+    background-color: #2e7dd6;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#alignSelect:hover {
+    background-color: #4791e6;
+}
+
 button {
     padding: 10px 20px;
     font-size: 1em;

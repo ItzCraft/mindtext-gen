@@ -14,7 +14,13 @@
     </div>
 
     <div class="input-area">
-        <input type="text" id="textInput" placeholder="Enter your text..." maxlength="50">
+        <textarea id="textInput" placeholder="Enter your text..." rows="4"></textarea>
+        <label for="alignSelect">Align:</label>
+        <select id="alignSelect">
+            <option value="left">Left</option>
+            <option value="center">Center</option>
+            <option value="right">Right</option>
+        </select>
         <button id="generateBtn">Generate</button>
         <button id="tintBtn">Tint</button>
         <button id="downloadBtn" disabled>Download</button>
