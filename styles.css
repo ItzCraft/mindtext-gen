@@ -44,7 +44,7 @@ input {
 }
 
 label[for="alignSelect"] {
-    font-size: 1em;
+    font-size: 3em;
     font-weight: bold;
     color: #fff;
     margin-right: 8px;
