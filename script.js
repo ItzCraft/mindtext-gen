@@ -44,8 +44,7 @@ generateBtn.addEventListener("click", async () => {
     }
 
     
-    const perRow = lengthInput.value.trim(); // change height every X symbols
-    const letterHeight = 100; // to be honest, i guessed... it works though
+    const perRow = lengthInput.value.trim(); // change height every X symbol
     
     // find maximum symbol width for sizing logic
     const maxWidth = Math.max(...symbols.map(img => img.width));
