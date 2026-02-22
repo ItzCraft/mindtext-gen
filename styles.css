@@ -43,19 +43,15 @@ input {
     border: none;
 }
 
-.align-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.align-container label {
+label[for="alignSelect"] {
     font-size: 1em;
     font-weight: bold;
+    color: #fff;
+    margin-right: 8px;
     user-select: none;
 }
 
-.align-container select {
+#alignSelect {
     padding: 10px;
     font-size: 1em;
     background-color: #2e7dd6;
@@ -63,11 +59,11 @@ input {
     border-radius: 5px;
     border: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.align-container select:hover {
+#alignSelect:hover {
     background-color: #4791e6;
-    
 }
 
 button {
