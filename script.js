@@ -6,6 +6,7 @@ const generateBtn = document.getElementById("generateBtn");
 const downloadBtn = document.getElementById("downloadBtn");
 const tintBtn = document.getElementById("tintBtn");
 const textInput = document.getElementById("textInput");
+const alignSelect = document.getElementById("alignSelect");
 const colorInput = document.getElementById("colorInput"),
       colorInputNum = document.getElementById("colorInputNum"),
       colorInputSym = document.getElementById("colorInputSym");
@@ -82,20 +83,27 @@ generateBtn.addEventListener("click", async () => {
     let y = 0;
 
     for(const symbols of allLines){
+          const lineWidth = symbols.reduce((sum,img)=>sum+img.width,0);
+          let x = 0;
+          
+          const align = alignSelect.value;
+          
+          if(align === "center"){
+                x = (canvas.width - lineWidth) / 2;
+          }
+          else if(align === "right"){
+                x = canvas.width - lineWidth;
+          }
 
-        let x = 0;
-
-        for(const img of symbols){
+          for(const img of symbols){
 
             const ratio = letterHeight / img.height;
             const drawWidth = img.width * ratio;
-
             ctx.putImageData(img,x,y);
 
             x += drawWidth;
-        }
-
-        y += letterHeight;
+          }
+          y += letterHeight;
     }
 
     downloadBtn.disabled = false;
